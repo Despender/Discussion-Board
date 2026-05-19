@@ -1,0 +1,75 @@
+.lobby-toolbar-panel {
+  width: min(320px, calc(100vw - 32px));
+}
+
+.lobby-toolbar-panel__body {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.lobby-toolbar {
+  background: transparent;
+  color: #f2f3f5;
+}
+
+.lobby-toolbar__members {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.lobby-toolbar__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  opacity: 0.45;
+}
+
+.lobby-toolbar__dot--online {
+  opacity: 1;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.lobby-toolbar__hint {
+  color: #b5bac1 !important;
+  line-height: 1.35;
+}
+
+.lobby-toolbar .text-muted {
+  color: #b5bac1 !important;
+}
+
+.lobby-toolbar__pencil-row {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.lobby-toolbar__pencil-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  padding: 12px;
+  background: #1e1f22;
+  border: 1px solid #5865f2;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+  z-index: 20;
+}
+
+.lobby-toolbar__pencil-menu-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #f2f3f5;
+  margin-bottom: 8px;
+}
+
+.lobby-toolbar__pencil-menu .form-label {
+  color: #dbdee1;
+}
+
+.lobby-toolbar .list-group-item {
+  border-color: #3f4147;
+}

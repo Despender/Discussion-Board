@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "presence": {
+      "$lobbyId": {
+        ".read": true,
+        "$userId": {
+          ".write": true
+        }
+      }
+    },
+    "selections": {
+      "$lobbyId": {
+        ".read": true,
+        "$userId": {
+          ".write": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,64 @@
+.floating-panel {
+  position: fixed;
+  min-width: 140px;
+  max-width: min(360px, calc(100vw - 24px));
+  background: #2b2d31;
+  border: 1px solid #3f4147;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  color: #f2f3f5;
+}
+
+.floating-panel.is-collapsed {
+  width: auto;
+}
+
+.floating-panel--minimal {
+  min-width: 0;
+}
+
+.floating-panel--minimal .floating-panel__header {
+  justify-content: center;
+  padding: 0.25rem 0.35rem;
+}
+
+.floating-panel--minimal .floating-panel__toggle {
+  min-width: 1.75rem;
+  padding: 0.1rem 0.35rem;
+  font-size: 1rem;
+  line-height: 1.1;
+}
+
+.floating-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.65rem;
+  cursor: move;
+  user-select: none;
+  border-bottom: 1px solid #3f4147;
+  font-size: 0.875rem;
+  touch-action: none;
+}
+
+.floating-panel.is-collapsed .floating-panel__header {
+  border-bottom: none;
+}
+
+.floating-panel__title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.floating-panel__toggle {
+  flex-shrink: 0;
+  cursor: pointer;
+  min-width: 2rem;
+}
+
+.floating-panel__body {
+  padding: 0;
+}

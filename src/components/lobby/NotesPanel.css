@@ -1,0 +1,29 @@
+.notes-panel {
+  width: 200px;
+}
+
+.notes-panel.floating-panel.is-collapsed {
+  width: auto;
+}
+
+.notes-panel__body-wrap {
+  padding: 0;
+}
+
+.notes-panel__body {
+  min-height: 72px;
+  max-height: 140px;
+  resize: vertical;
+  border: none;
+  border-radius: 0 0 8px 8px;
+  background: #1e1f22;
+  color: #f2f3f5;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  padding: 6px 8px;
+}
+
+.notes-panel__body::placeholder {
+  color: #949ba4;
+  opacity: 1;
+}

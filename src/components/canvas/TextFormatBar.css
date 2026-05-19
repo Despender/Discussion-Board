@@ -1,0 +1,33 @@
+.text-format-bar {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(30, 31, 34, 0.95);
+  border: 1px solid #3f4147;
+  border-radius: 6px;
+  z-index: 6;
+}
+
+.text-format-bar__colors {
+  display: flex;
+  gap: 4px;
+}
+
+.text-format-bar__color {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.text-format-bar__color.is-active {
+  border-color: #fff;
+}

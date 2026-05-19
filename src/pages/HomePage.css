@@ -1,0 +1,40 @@
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: radial-gradient(ellipse at top, #2b2d31 0%, #1e1f22 55%, #111214 100%);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 18px;
+}
+
+.home-page__card {
+  width: min(1080px, 100%);
+  background: #2b2d31;
+  border: 1px solid #3f4147;
+  color: #f2f3f5;
+}
+
+.home-page__title {
+  color: #fff;
+}
+
+.home-page__subtitle {
+  color: #b5bac1;
+  line-height: 1.5;
+}
+
+.home-page .form-control,
+.home-page .form-select {
+  background: #1e1f22;
+  border-color: #3f4147;
+  color: #f2f3f5;
+}
+
+.home-page .form-control:focus {
+  background: #1e1f22;
+  color: #f2f3f5;
+  border-color: #5865f2;
+  box-shadow: 0 0 0 0.2rem rgba(88, 101, 242, 0.25);
+}

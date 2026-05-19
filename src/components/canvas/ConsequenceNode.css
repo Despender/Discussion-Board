@@ -1,0 +1,14 @@
+.consequence-node {
+  position: absolute;
+  z-index: 18;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.consequence-node__symbol {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f2f3f5;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  line-height: 1;
+}

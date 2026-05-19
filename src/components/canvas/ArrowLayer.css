@@ -1,0 +1,38 @@
+.arrow-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.arrow-layer__arrow {
+  pointer-events: all;
+}
+
+.arrow-layer__hit {
+  cursor: pointer;
+}
+
+.arrow-layer__arrow.is-selected .arrow-layer__hit {
+  cursor: grab;
+}
+
+.arrow-layer__draft line,
+.arrow-layer__arrow polyline[stroke-dasharray] {
+  opacity: 0.85;
+}
+
+.arrow-layer__handle {
+  fill: rgba(88, 101, 242, 0.35);
+  stroke: #5865f2;
+  stroke-width: 1.5;
+  cursor: grab;
+  pointer-events: all;
+}
+
+.arrow-layer__handle:hover {
+  fill: rgba(88, 101, 242, 0.6);
+}

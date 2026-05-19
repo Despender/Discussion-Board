@@ -1,0 +1,32 @@
+.board-minimap-panel {
+  width: 136px;
+}
+
+.board-minimap-panel__body {
+  padding: 6px 8px 8px;
+}
+
+.board-minimap__surface {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background: #2b2d31;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.board-minimap__dot {
+  position: absolute;
+  background: rgba(88, 166, 255, 0.75);
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+.board-minimap__viewport {
+  position: absolute;
+  border: 1px solid #f0c040;
+  background: rgba(240, 192, 64, 0.12);
+  pointer-events: none;
+  box-sizing: border-box;
+}
