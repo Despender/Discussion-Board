@@ -9,7 +9,9 @@ import {
 import { updateCursor } from '../../services/lobbyService';
 import { eraserHitsStroke, findTextElementAt, getTextElementBounds } from '../../utils/geometry';
 import { getBorderIntersection } from '../../utils/arrowRouting';
+import { CANVAS_SIZE, getDrawCanvasBackingSize, getDrawCanvasScale } from '../../constants/canvas';
 import { redrawCanvasLayers } from '../../utils/drawStrokes';
+import { observeElementResize } from '../../utils/observeResize';
 import TextBlock from './TextBlock';
 import ArrowLayer from './ArrowLayer';
 import './CanvasBoard.css';
@@ -20,8 +22,9 @@ function isVisibleToUser(el, viewerId) {
   return el.authorId === viewerId;
 }
 
-const CANVAS_SIZE = 16000;
 const GRID_STEP = 80;
+const DRAW_CANVAS_BACKING = getDrawCanvasBackingSize();
+const DRAW_CANVAS_SCALE = getDrawCanvasScale();
 
 const CanvasBoard = forwardRef(function CanvasBoard(
   {
@@ -115,12 +118,9 @@ const CanvasBoard = forwardRef(function CanvasBoard(
   useEffect(() => {
     const vp = viewportRef.current;
     if (!vp) return undefined;
-    const ro = new ResizeObserver((entries) => {
-      const { width, height } = entries[0].contentRect;
+    return observeElementResize(vp, ({ width, height }) => {
       setViewportSize({ width, height });
     });
-    ro.observe(vp);
-    return () => ro.disconnect();
   }, []);
 
   useEffect(() => {
@@ -168,7 +168,8 @@ const CanvasBoard = forwardRef(function CanvasBoard(
       scale,
       live,
       eraserPreview,
-      pencilWidth * 2
+      pencilWidth * 2,
+      DRAW_CANVAS_SCALE
     );
   }, [strokes, scale, pencilColor, pencilWidth, pencilActive, eraserActive]);
 
@@ -471,8 +472,8 @@ const CanvasBoard = forwardRef(function CanvasBoard(
           <canvas
             ref={drawCanvasRef}
             className="canvas-board__draw-layer"
-            width={CANVAS_SIZE}
-            height={CANVAS_SIZE}
+            width={DRAW_CANVAS_BACKING}
+            height={DRAW_CANVAS_BACKING}
             style={{ pointerEvents: drawLayerActive ? 'auto' : 'none' }}
             onPointerDown={onCanvasPointerDown}
             onPointerMove={onCanvasPointerMove}

@@ -33,11 +33,23 @@ export function drawEraserPathOnCtx(ctx, points, width, scale = 1) {
   ctx.restore();
 }
 
-export function redrawCanvasLayers(canvas, strokes, scale, liveStroke = null, eraserPoints = null, eraserWidth = 8) {
+export function redrawCanvasLayers(
+  canvas,
+  strokes,
+  scale,
+  liveStroke = null,
+  eraserPoints = null,
+  eraserWidth = 8,
+  drawScale = 1
+) {
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (drawScale !== 1) {
+    ctx.scale(drawScale, drawScale);
+  }
   strokes.forEach((s) => drawStrokeOnCtx(ctx, s, scale));
   if (liveStroke?.points?.length) {
     drawStrokeOnCtx(ctx, liveStroke, scale);

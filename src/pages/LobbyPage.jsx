@@ -60,6 +60,8 @@ export default function LobbyPage() {
   });
   const [canUndo, setCanUndo] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [joinDone, setJoinDone] = useState(false);
+  const [lobbySynced, setLobbySynced] = useState(false);
   const [error, setError] = useState('');
   const [toasts, setToasts] = useState([]);
   const [isLeaving, setIsLeaving] = useState(false);
@@ -68,6 +70,7 @@ export default function LobbyPage() {
   const [textHighlightColor] = useState('#fee75c');
   const joinedRef = useRef(false);
   const leavingRef = useRef(false);
+  const pageHideReadyRef = useRef(false);
   const prevMembersRef = useRef({});
   const prevTurnUserRef = useRef(null);
   const selectionDebounceRef = useRef(null);
@@ -111,7 +114,10 @@ export default function LobbyPage() {
     let cancelled = false;
 
     const unsubLobby = subscribeLobby(code, (data) => {
-      if (!cancelled) setLobby(data);
+      if (!cancelled) {
+        setLobby(data);
+        setLobbySynced(true);
+      }
     });
 
     const unsubMembers = subscribeMembers(code, (m) => {
@@ -150,6 +156,8 @@ export default function LobbyPage() {
     const enter = async () => {
       if (joinedRef.current) return;
       setLoading(true);
+      setJoinDone(false);
+      setLobbySynced(false);
       setError('');
       try {
         await joinLobby(code, {
@@ -161,7 +169,7 @@ export default function LobbyPage() {
       } catch {
         if (!cancelled) setError('Не вдалося підключитися до лобі');
       } finally {
-        if (!cancelled) setLoading(false);
+        if (!cancelled) setJoinDone(true);
       }
     };
 
@@ -171,6 +179,14 @@ export default function LobbyPage() {
       cancelled = true;
     };
   }, [code, userId, profile.nickname, profile.color]);
+
+  useEffect(() => {
+    if (!joinDone || !lobbySynced) return;
+    setLoading(false);
+    if (!lobby && !error) {
+      setError('Лобі не знайдено');
+    }
+  }, [joinDone, lobbySynced, lobby, error]);
 
   useEffect(() => {
     if (!lobby?.fontId) return;
@@ -206,14 +222,22 @@ export default function LobbyPage() {
   }, [code, userId, navigate]);
 
   useEffect(() => {
+    const readyTimer = window.setTimeout(() => {
+      pageHideReadyRef.current = true;
+    }, 2500);
+
     const onPageHide = (e) => {
       if (e.persisted) return;
+      if (!pageHideReadyRef.current) return;
       if (!joinedRef.current || leavingRef.current) return;
       runLeaveLobby();
     };
 
     window.addEventListener('pagehide', onPageHide);
-    return () => window.removeEventListener('pagehide', onPageHide);
+    return () => {
+      window.clearTimeout(readyTimer);
+      window.removeEventListener('pagehide', onPageHide);
+    };
   }, [runLeaveLobby]);
 
   const handleUndo = useCallback(async () => {

@@ -1,3 +1,4 @@
+import { CANVAS_SIZE } from '../../constants/canvas';
 import { resolveArrowFromIds, pathToSvgPoints, lastSegmentAngle } from '../../utils/arrowRouting';
 import './ArrowLayer.css';
 
@@ -107,7 +108,11 @@ export default function ArrowLayer({
   }
 
   return (
-    <svg className="arrow-layer" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className="arrow-layer"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox={`0 0 ${CANVAS_SIZE} ${CANVAS_SIZE}`}
+    >
       {list.map((arrow) => {
         const resolved = resolveArrowFromIds(arrow, elements);
         if (!resolved?.path) return null;

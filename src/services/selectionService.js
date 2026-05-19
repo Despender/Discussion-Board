@@ -4,7 +4,7 @@ import { rtdb, isFirebaseConfigured } from '../firebase/config';
 const localSelections = new Map();
 
 export function subscribeSelections(lobbyCode, callback) {
-  if (!isFirebaseConfigured) {
+  if (!isFirebaseConfigured || !rtdb) {
     const emit = () => callback(Object.fromEntries(localSelections));
     emit();
     const interval = setInterval(emit, 400);
@@ -18,7 +18,7 @@ export function subscribeSelections(lobbyCode, callback) {
 }
 
 export async function updateTextSelection(lobbyCode, userId, payload) {
-  if (!isFirebaseConfigured) {
+  if (!isFirebaseConfigured || !rtdb) {
     if (!payload) {
       localSelections.delete(userId);
     } else {

@@ -1,4 +1,4 @@
-const CANVAS_SIZE = 16000;
+import { CANVAS_SIZE } from '../constants/canvas';
 
 export async function exportBoardSnapshot(worldElement, filename = 'discussion-board.png') {
   if (!worldElement) throw new Error('Полотно не знайдено');

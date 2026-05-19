@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import TextFormatBar from './TextFormatBar';
 import RemoteSelectionHighlight from './RemoteSelectionHighlight';
+import { observeElementResize } from '../../utils/observeResize';
 import './TextBlock.css';
 
 function getSelectionInEditor(editorEl) {
@@ -63,14 +64,12 @@ export default function TextBlock({
   useEffect(() => {
     const el = editorRef.current;
     if (!el) return undefined;
-    const ro = new ResizeObserver(() => {
+    return observeElementResize(el, () => {
       const h = el.offsetHeight;
       if (h > 20 && Math.abs(h - (element.height || 0)) > 6) {
         onUpdate({ height: h });
       }
     });
-    ro.observe(el);
-    return () => ro.disconnect();
   }, [element.id, element.height, onUpdate]);
 
   const saveHtml = useCallback(() => {

@@ -474,7 +474,7 @@ export async function setCurrentTurn(code, userId) {
 }
 
 export function subscribePresence(code, userId, profile, callback) {
-  if (!isFirebaseConfigured) {
+  if (!isFirebaseConfigured || !rtdb) {
     callback({});
     return () => {};
   }

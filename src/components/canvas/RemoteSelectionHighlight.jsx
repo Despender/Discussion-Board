@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { observeElementResize } from '../../utils/observeResize';
 import './RemoteSelectionHighlight.css';
 
 function rectsForTextRange(editorEl, start, end) {
@@ -106,11 +107,10 @@ export default function RemoteSelectionHighlight({
     };
 
     update();
-    const ro = new ResizeObserver(update);
-    ro.observe(editor);
+    const unobserve = observeElementResize(editor, update);
     window.addEventListener('scroll', update, true);
     return () => {
-      ro.disconnect();
+      unobserve();
       window.removeEventListener('scroll', update, true);
     };
   }, [editorRef, blockRef, remoteSelection]);

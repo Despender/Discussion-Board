@@ -8,6 +8,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 import { db, isFirebaseConfigured } from '../firebase/config';
+import { randomUUID } from '../utils/ids';
 
 const localElements = new Map();
 
@@ -68,7 +69,7 @@ export function subscribeElements(lobbyCode, callback) {
 }
 
 export async function createTextElement(lobbyCode, payload) {
-  const id = `t_${crypto.randomUUID()}`;
+  const id = `t_${randomUUID()}`;
   const data = {
     type: 'text',
     x: payload.x,
@@ -198,7 +199,7 @@ export async function deleteTextBlock(lobbyCode, textId, elements) {
 }
 
 export async function createStroke(lobbyCode, { points, color, width, authorId, isPrivate }) {
-  const id = `s_${crypto.randomUUID()}`;
+  const id = `s_${randomUUID()}`;
   const normalizedPoints = normalizeStrokePoints(points);
   const data = {
     type: 'stroke',
@@ -228,7 +229,7 @@ export async function createStroke(lobbyCode, { points, color, width, authorId, 
 }
 
 export async function createArrow(lobbyCode, payload) {
-  const id = `a_${crypto.randomUUID()}`;
+  const id = `a_${randomUUID()}`;
   const data = stripUndefined({
     type: 'arrow',
     fromId: payload.fromId || null,
@@ -324,7 +325,7 @@ export async function createConsequence(lobbyCode, payload) {
     isPrivate: privateFlag,
   });
 
-  const id = `c_${crypto.randomUUID()}`;
+  const id = `c_${randomUUID()}`;
   const data = {
     type: 'consequence',
     sourceId: sourceElement.id,
